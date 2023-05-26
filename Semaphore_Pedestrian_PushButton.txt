@@ -1,0 +1,61 @@
+int ledpinG = 7;
+int ledpinY = 8;
+int ledpinR = 9; 
+int ledpinGP = 12;
+int ledpinRP = 11;
+
+int botao = 2;
+
+boolean delayvr = false;
+
+void setup() {
+    pinMode(ledpinG,OUTPUT);
+    pinMode(ledpinY,OUTPUT);
+    pinMode(ledpinR,OUTPUT);
+    pinMode(ledpinGP,OUTPUT);
+    pinMode(ledpinRP,OUTPUT);
+    pinMode(botao, INPUT);
+  attachInterrupt(digitalPinToInterrupt(botao), ped, CHANGE);
+}
+
+void loop() {
+    digitalWrite(ledpinG, HIGH);
+  digitalWrite(ledpinY, LOW);
+  digitalWrite(ledpinR, LOW);
+  
+  digitalWrite(ledpinGP, LOW);
+  digitalWrite(ledpinRP, HIGH);
+  for(int i = 0; delayvr == false && i < 3000; i += 100){
+    delay(100);
+    }
+  
+  digitalWrite(ledpinG, LOW);
+  digitalWrite(ledpinY, HIGH);
+  digitalWrite(ledpinR, LOW);
+  delay(2000);
+  
+  digitalWrite(ledpinG, LOW);
+  digitalWrite(ledpinY,LOW);
+  digitalWrite(ledpinR,HIGH);
+  
+  digitalWrite(ledpinGP, HIGH);
+  digitalWrite(ledpinRP,LOW);
+  
+  delay(3000);
+  digitalWrite(ledpinGP, LOW);
+  
+  for(int i= 0; i<= 12; i++){
+   digitalWrite(ledpinRP, !(digitalRead(ledpinRP)));
+    	delay(250);
+  }
+  
+  if(delayvr == true)
+  {
+    delayvr = false;
+  }
+  }
+ 
+ void ped()
+{
+   delayvr = true;
+}
